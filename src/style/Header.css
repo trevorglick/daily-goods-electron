@@ -1,0 +1,9 @@
+.header-container {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(31, 133, 39);
+}
+
+.header-text {
+  color: white;
+}
