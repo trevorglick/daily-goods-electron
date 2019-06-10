@@ -13,7 +13,7 @@ function getDBBaseRef() {
 export async function getLists() {
   const dbRef = getDBBaseRef();
   let payload;
-  const itemsInDB = await dbRef.once("value").then(function(snapshot) {
+  await dbRef.once("value").then(function(snapshot) {
     payload = snapshot.val();
   });
   return payload;
@@ -26,7 +26,11 @@ export function createList(listName) {
   dbRef.set(
     {
       name: listName,
-      stuff: ["cereal", "milk", "cookies"]
+      stuff: [
+        { name: "cereal", acquired: false },
+        { name: "milk", acquired: false },
+        { name: "cookies", acquired: false }
+      ]
     },
     error => {
       if (error) {
@@ -38,11 +42,12 @@ export function createList(listName) {
   );
 }
 
-export function getListItems(listName) {
+export async function getListItems(listName) {
+  console.log(`getting list items for ${listName}`);
   const dbRef = getDBListRef(listName);
   let payload;
-  const itemsInDB = dbRef.on("value", items => {
-    payload = items.val();
+  await dbRef.once("value").then(function(snapshot) {
+    payload = snapshot.val();
   });
 
   return payload;

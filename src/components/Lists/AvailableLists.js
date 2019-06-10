@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import CreateList from "./CreateList";
+import GoodsList from "../Goods/GoodsList";
 import List from "./List";
 import {
   deleteList,
@@ -10,6 +10,7 @@ import {
 
 function AvailableLists() {
   const [lists, setLists] = useState([]);
+  const [listOfGoods, setListOfGoods] = useState([]);
   const [monitor, setMonitor] = useState("");
 
   const emitListName = name => {
@@ -20,6 +21,20 @@ function AvailableLists() {
     console.log(`list to delete ${lists[index].name}`);
     deleteList(lists[index].name);
     setMonitor(index);
+  };
+
+  const retrieveListItems = async index => {
+    console.log(`retreiving items from ${lists[index].name}`);
+    const result = await getListItems(lists[index].name);
+    console.log("result from retrievelistitems");
+    console.log(result);
+    let listOfGoods = [];
+    if (result) {
+      setListOfGoods(result);
+      return listOfGoods;
+    } else {
+      setListOfGoods(listOfGoods);
+    }
   };
 
   useEffect(() => {
@@ -54,12 +69,15 @@ function AvailableLists() {
                 list={list}
                 index={index}
                 // goodAcquired={goodAcquired}
+                retrieveListItems={retrieveListItems}
                 deleteListByIndex={deleteListByIndex}
                 key={index}
               />
             ))
           : null}
       </div>
+      <hr />
+      <GoodsList listOfGoods={listOfGoods} />
     </div>
   );
 }

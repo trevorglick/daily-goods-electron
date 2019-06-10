@@ -1,6 +1,5 @@
 import React from "react";
 import Header from "./Header";
-import GoodsList from "./Goods/GoodsList";
 import AvailableLists from "./Lists/AvailableLists";
 
 function App() {
@@ -12,8 +11,6 @@ function App() {
       </div>
       {/* <Auth /> */}
       <AvailableLists />
-      <hr />
-      <GoodsList />
     </div>
   );
 }

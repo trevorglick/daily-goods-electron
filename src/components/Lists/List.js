@@ -1,9 +1,14 @@
 import React from "react";
 
-function List({ list, index, deleteListByIndex }) {
+function List({ list, index, deleteListByIndex, retrieveListItems }) {
   return (
     <div className="list">
-      {list.name}
+      <div
+        style={{ display: "inline", cursor: "pointer" }}
+        onClick={() => retrieveListItems(index)}
+      >
+        {list.name}
+      </div>
       <button
         style={{ background: "red" }}
         onClick={() => deleteListByIndex(index)}

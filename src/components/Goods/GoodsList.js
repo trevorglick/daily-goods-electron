@@ -1,25 +1,21 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import AddGood from "./AddGood";
 import Good from "./Good";
 
-function GoodsList() {
-  const [goods, setGoods] = useState([
-    {
-      name: "Cereal",
-      acquired: false
-    },
-    {
-      name: "Milk",
-      acquired: true
-    },
-    {
-      name: "Ice",
-      acquired: false
+function GoodsList({ listOfGoods }) {
+  const [goods, setGoods] = useState([]);
+
+  const previousGoodsRef = useRef(listOfGoods.stuff);
+  useEffect(() => {
+    if (previousGoodsRef.current !== listOfGoods.stuff) {
+      if (listOfGoods.stuff) {
+        setGoods(listOfGoods.stuff);
+        previousGoodsRef.current = listOfGoods.stuff;
+      }
     }
-  ]);
+  }, [listOfGoods.stuff, goods]);
 
   // This just gets a count of how many goods are left to be acquired.
-  // const goodsRemaining = goods.filter(good => !good.acquired).length;
   const goodsRemaining = useMemo(
     () => goods.filter(good => !good.acquired).length,
     [goods]
@@ -49,15 +45,17 @@ function GoodsList() {
         Pending tasks ({goodsRemaining})
       </div>
       <div className="goods-list-item">
-        {goods.map((good, index) => (
-          <Good
-            good={good}
-            index={index}
-            goodAcquired={goodAcquired}
-            removeGood={removeGood}
-            key={index}
-          />
-        ))}
+        {goods.length >= 1
+          ? goods.map((good, index) => (
+              <Good
+                good={good}
+                index={index}
+                goodAcquired={goodAcquired}
+                removeGood={removeGood}
+                key={index}
+              />
+            ))
+          : null}
       </div>
       <div className="goods-list-add-good">
         <AddGood addGood={addGood} />
