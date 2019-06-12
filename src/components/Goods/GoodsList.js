@@ -1,30 +1,42 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
+import { getListItems } from "../../utils/firebase/actions";
 import AddGood from "./AddGood";
 import Good from "./Good";
 
-function GoodsList({ listOfGoods }) {
+function GoodsList({ selectedList }) {
+  console.log("selectedList");
+  console.log(selectedList);
   const [goods, setGoods] = useState([]);
+  const [list, setList] = useState("");
 
-  const previousGoodsRef = useRef(listOfGoods.stuff);
   useEffect(() => {
-    if (previousGoodsRef.current !== listOfGoods.stuff) {
-      if (listOfGoods.stuff) {
-        setGoods(listOfGoods.stuff);
-        previousGoodsRef.current = listOfGoods.stuff;
+    setList(selectedList);
+  }, [selectedList]);
+
+  useEffect(() => {
+    let ignore = false;
+    // Gets the lists avaialable by name.
+    const fetchListItems = async () => {
+      const result = await getListItems(list.name);
+      let goods = [];
+      if (result) {
+        goods = result.stuff;
+        if (!ignore) setGoods(goods);
+      } else {
+        setGoods(goods);
       }
-    }
-  }, [listOfGoods.stuff, goods]);
+    };
+    fetchListItems();
+    return () => {
+      ignore = true;
+    };
+  }, [list]);
 
   // This just gets a count of how many goods are left to be acquired.
   const goodsRemaining = useMemo(
     () => goods.filter(good => !good.acquired).length,
     [goods]
   );
-
-  const addGood = name => {
-    const newGoods = [...goods, { name, acquired: false }];
-    setGoods(newGoods);
-  };
 
   const goodAcquired = index => {
     const newGoods = [...goods];
@@ -58,7 +70,7 @@ function GoodsList({ listOfGoods }) {
           : null}
       </div>
       <div className="goods-list-add-good">
-        <AddGood addGood={addGood} />
+        <AddGood list={list} />
       </div>
     </div>
   );

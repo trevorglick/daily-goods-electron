@@ -1,11 +1,11 @@
 import React from "react";
 
-function List({ list, index, deleteListByIndex, retrieveListItems }) {
+function List({ list, index, deleteListByIndex, selectList }) {
   return (
     <div className="list">
       <div
         style={{ display: "inline", cursor: "pointer" }}
-        onClick={() => retrieveListItems(index)}
+        onClick={() => selectList(index)}
       >
         {list.name}
       </div>

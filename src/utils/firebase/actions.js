@@ -63,3 +63,14 @@ export function deleteList(listName) {
     }
   });
 }
+
+export function addGood(name, listName, listGoodsCount) {
+  const dbRef = getDBListRef(listName).child("stuff/" + listGoodsCount);
+  dbRef.set({ name, acquired: false }, error => {
+    if (error) {
+      console.log(`there was an issue adding ${name} to ${listName}`);
+    } else {
+      console.log(`${name} has been added to ${listName}`);
+    }
+  });
+}
