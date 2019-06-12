@@ -4,23 +4,27 @@ import AddGood from "./AddGood";
 import Good from "./Good";
 
 function GoodsList({ selectedList }) {
-  console.log("selectedList");
-  console.log(selectedList);
   const [goods, setGoods] = useState([]);
-  const [list, setList] = useState("");
+  const [listInfo, setList] = useState("");
+  const [monitor, setMonitor] = useState("");
 
   useEffect(() => {
     setList(selectedList);
   }, [selectedList]);
 
+  const emitGoodName = name => {
+    setMonitor(name);
+  };
+
   useEffect(() => {
     let ignore = false;
     // Gets the lists avaialable by name.
     const fetchListItems = async () => {
-      const result = await getListItems(list.name);
+      if (listInfo.name === undefined) return;
+      const result = await getListItems(listInfo.name);
       let goods = [];
       if (result) {
-        goods = result.stuff;
+        goods = Object.values(result.stuff);
         if (!ignore) setGoods(goods);
       } else {
         setGoods(goods);
@@ -30,7 +34,7 @@ function GoodsList({ selectedList }) {
     return () => {
       ignore = true;
     };
-  }, [list]);
+  }, [listInfo, monitor]);
 
   // This just gets a count of how many goods are left to be acquired.
   const goodsRemaining = useMemo(
@@ -70,7 +74,7 @@ function GoodsList({ selectedList }) {
           : null}
       </div>
       <div className="goods-list-add-good">
-        <AddGood list={list} />
+        <AddGood listInfo={listInfo} emitGoodName={emitGoodName} />
       </div>
     </div>
   );

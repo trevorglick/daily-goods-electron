@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { addGood } from "../../utils/firebase/actions";
 
-function AddGood({ listInfo }) {
+function AddGood({ listInfo, emitGoodName }) {
   const [list, setList] = useState("");
   const [value, setValue] = useState("");
-  const [monitor, setMonitor] = useState("");
 
   const previousListRef = useRef(listInfo);
   useEffect(() => {
@@ -14,14 +13,14 @@ function AddGood({ listInfo }) {
         previousListRef.current = listInfo;
       }
     }
-  }, [listInfo, monitor]);
+  }, [listInfo]);
 
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
 
-    setMonitor(value);
-    addGood(value, list.name, list.stuff.length);
+    emitGoodName(value);
+    addGood(value, list.name);
     setValue("");
   };
 

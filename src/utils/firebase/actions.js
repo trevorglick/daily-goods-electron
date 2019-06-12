@@ -64,8 +64,10 @@ export function deleteList(listName) {
   });
 }
 
-export function addGood(name, listName, listGoodsCount) {
-  const dbRef = getDBListRef(listName).child("stuff/" + listGoodsCount);
+export function addGood(name, listName) {
+  const dbRef = getDBListRef(listName)
+    .child("stuff")
+    .push();
   dbRef.set({ name, acquired: false }, error => {
     if (error) {
       console.log(`there was an issue adding ${name} to ${listName}`);
