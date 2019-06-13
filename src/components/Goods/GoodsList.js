@@ -1,19 +1,45 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  acquireGood,
+  getListItems,
+  removeGood
+} from "../../utils/firebase/actions";
 import AddGood from "./AddGood";
 import Good from "./Good";
 
-function GoodsList({ listOfGoods }) {
+function GoodsList({ selectedList }) {
   const [goods, setGoods] = useState([]);
+  const [listInfo, setList] = useState("");
+  const [monitor, setMonitor] = useState("");
 
-  const previousGoodsRef = useRef(listOfGoods.stuff);
   useEffect(() => {
-    if (previousGoodsRef.current !== listOfGoods.stuff) {
-      if (listOfGoods.stuff) {
-        setGoods(listOfGoods.stuff);
-        previousGoodsRef.current = listOfGoods.stuff;
+    setList(selectedList);
+  }, [selectedList]);
+
+  const emitGoodName = name => {
+    setMonitor(name);
+  };
+
+  useEffect(() => {
+    let ignore = false;
+    // Gets the lists avaialable by name.
+    const fetchListItems = async () => {
+      if (listInfo.name === undefined) return;
+      const result = await getListItems(listInfo.name);
+      let goods = [];
+      if (result) {
+        if (!result.hasOwnProperty("stuff")) return;
+        goods = Object.values(result.stuff);
+        if (!ignore) setGoods(goods);
+      } else {
+        setGoods(goods);
       }
-    }
-  }, [listOfGoods.stuff, goods]);
+    };
+    fetchListItems();
+    return () => {
+      ignore = true;
+    };
+  }, [listInfo, monitor]);
 
   // This just gets a count of how many goods are left to be acquired.
   const goodsRemaining = useMemo(
@@ -21,21 +47,14 @@ function GoodsList({ listOfGoods }) {
     [goods]
   );
 
-  const addGood = name => {
-    const newGoods = [...goods, { name, acquired: false }];
-    setGoods(newGoods);
+  const goodAcquiredByUniqueId = uniqueId => {
+    acquireGood(uniqueId, listInfo.name);
+    setMonitor(goods);
   };
 
-  const goodAcquired = index => {
-    const newGoods = [...goods];
-    newGoods[index].acquired = true;
-    setGoods(newGoods);
-  };
-
-  const removeGood = index => {
-    const newGoods = [...goods];
-    newGoods.splice(index, 1);
-    setGoods(newGoods);
+  const removeGoodByUniqueID = uniqueId => {
+    removeGood(uniqueId, listInfo.name);
+    setMonitor(goods);
   };
 
   return (
@@ -46,19 +65,18 @@ function GoodsList({ listOfGoods }) {
       </div>
       <div className="goods-list-item">
         {goods.length >= 1
-          ? goods.map((good, index) => (
+          ? goods.map(good => (
               <Good
                 good={good}
-                index={index}
-                goodAcquired={goodAcquired}
-                removeGood={removeGood}
-                key={index}
+                goodAcquiredByUniqueId={goodAcquiredByUniqueId}
+                removeGoodByUniqueID={removeGoodByUniqueID}
+                key={good.uniqueId}
               />
             ))
           : null}
       </div>
       <div className="goods-list-add-good">
-        <AddGood addGood={addGood} />
+        <AddGood listInfo={listInfo} emitGoodName={emitGoodName} />
       </div>
     </div>
   );
