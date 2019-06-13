@@ -8,7 +8,7 @@ function AddGood({ listInfo, emitGoodName }) {
   const previousListRef = useRef(listInfo);
   useEffect(() => {
     if (previousListRef.current !== listInfo) {
-      if (listInfo.length !== 0) {
+      if (listInfo.hasOwnProperty("name")) {
         setList(listInfo);
         previousListRef.current = listInfo;
       }
@@ -18,6 +18,7 @@ function AddGood({ listInfo, emitGoodName }) {
   const handleSubmit = e => {
     e.preventDefault();
     if (!value) return;
+    if (!list.name) return;
 
     emitGoodName(value);
     addGood(value, list.name);

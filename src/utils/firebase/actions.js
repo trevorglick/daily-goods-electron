@@ -25,12 +25,7 @@ export function createList(listName) {
 
   dbRef.set(
     {
-      name: listName,
-      stuff: [
-        { name: "cereal", acquired: false },
-        { name: "milk", acquired: false },
-        { name: "cookies", acquired: false }
-      ]
+      name: listName
     },
     error => {
       if (error) {
@@ -68,11 +63,48 @@ export function addGood(name, listName) {
   const dbRef = getDBListRef(listName)
     .child("stuff")
     .push();
-  dbRef.set({ name, acquired: false }, error => {
+
+  const uniqueId = dbRef.key;
+
+  dbRef.set({ uniqueId, name, acquired: false }, error => {
     if (error) {
       console.log(`there was an issue adding ${name} to ${listName}`);
     } else {
       console.log(`${name} has been added to ${listName}`);
+    }
+  });
+}
+
+export function removeGood(uniqueId, listName) {
+  const dbRef = getDBListRef(listName)
+    .child("stuff")
+    .child(uniqueId);
+  dbRef.remove(error => {
+    if (error) {
+      console.log(`there was an issue removing ${uniqueId} from ${listName}`);
+    } else {
+      console.log(`${uniqueId} has been remove from ${listName}`);
+    }
+  });
+}
+
+export async function acquireGood(uniqueId, listName) {
+  const dbRef = getDBListRef(listName)
+    .child("stuff")
+    .child(uniqueId);
+
+  let payload;
+  await dbRef.once("value").then(function(snapshot) {
+    payload = snapshot.val();
+  });
+
+  let acquired = !payload.acquired;
+
+  dbRef.update({ acquired }, error => {
+    if (error) {
+      console.log(`there was an issue updating ${uniqueId} in ${listName}`);
+    } else {
+      console.log(`${uniqueId} has been updated from ${listName}`);
     }
   });
 }

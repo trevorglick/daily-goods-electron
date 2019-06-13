@@ -1,5 +1,9 @@
-import React, { useState, useMemo, useEffect, useRef } from "react";
-import { getListItems } from "../../utils/firebase/actions";
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  acquireGood,
+  getListItems,
+  removeGood
+} from "../../utils/firebase/actions";
 import AddGood from "./AddGood";
 import Good from "./Good";
 
@@ -24,6 +28,7 @@ function GoodsList({ selectedList }) {
       const result = await getListItems(listInfo.name);
       let goods = [];
       if (result) {
+        if (!result.hasOwnProperty("stuff")) return;
         goods = Object.values(result.stuff);
         if (!ignore) setGoods(goods);
       } else {
@@ -42,16 +47,14 @@ function GoodsList({ selectedList }) {
     [goods]
   );
 
-  const goodAcquired = index => {
-    const newGoods = [...goods];
-    newGoods[index].acquired = true;
-    setGoods(newGoods);
+  const goodAcquiredByUniqueId = uniqueId => {
+    acquireGood(uniqueId, listInfo.name);
+    setMonitor(goods);
   };
 
-  const removeGood = index => {
-    const newGoods = [...goods];
-    newGoods.splice(index, 1);
-    setGoods(newGoods);
+  const removeGoodByUniqueID = uniqueId => {
+    removeGood(uniqueId, listInfo.name);
+    setMonitor(goods);
   };
 
   return (
@@ -62,13 +65,12 @@ function GoodsList({ selectedList }) {
       </div>
       <div className="goods-list-item">
         {goods.length >= 1
-          ? goods.map((good, index) => (
+          ? goods.map(good => (
               <Good
                 good={good}
-                index={index}
-                goodAcquired={goodAcquired}
-                removeGood={removeGood}
-                key={index}
+                goodAcquiredByUniqueId={goodAcquiredByUniqueId}
+                removeGoodByUniqueID={removeGoodByUniqueID}
+                key={good.uniqueId}
               />
             ))
           : null}

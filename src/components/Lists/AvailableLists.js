@@ -14,7 +14,6 @@ function AvailableLists() {
   };
 
   const deleteListByIndex = index => {
-    console.log(`list to delete ${lists[index].name}`);
     deleteList(lists[index].name);
     setMonitor(index);
   };
