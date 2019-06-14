@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import CreateList from "./CreateList";
 import GoodsList from "../Goods/GoodsList";
 import List from "./List";
-import { deleteList, getLists } from "../../utils/firebase/actions";
+import { deleteList, getLists } from "../../utils/firebase/goods";
 
 function AvailableLists() {
   const [lists, setLists] = useState([]);

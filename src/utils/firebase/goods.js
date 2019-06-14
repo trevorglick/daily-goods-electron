@@ -29,7 +29,7 @@ export function createList(listName) {
     },
     error => {
       if (error) {
-        console.log("set failed during creat list");
+        console.log("set failed during create list");
       } else {
         console.log("data successfully sent");
       }
