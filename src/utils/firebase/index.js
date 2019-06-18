@@ -1,4 +1,8 @@
-import firebase from "firebase";
+import * as firebase from "firebase/app";
+
+// Add the Firebase services that you want to use
+import "firebase/auth";
+import "firebase/database";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,

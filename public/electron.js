@@ -8,7 +8,10 @@ const globalShortcut = electron.globalShortcut;
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 900, height: 680 });
+  mainWindow = new BrowserWindow({
+    width: 900,
+    height: 680
+  });
   mainWindow.loadURL(
     isDev
       ? "http://localhost:3000"
@@ -19,6 +22,7 @@ function createWindow() {
     mainWindow.reload();
   });
 }
+
 app.on("ready", createWindow);
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {

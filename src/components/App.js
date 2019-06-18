@@ -3,12 +3,18 @@ import Auth from "./Auth/Auth";
 import Header from "./Header";
 import AvailableLists from "./Lists/AvailableLists";
 import { auth } from "../utils/firebase/index";
+import { getRedirectResult } from "../utils/firebase/auth";
 
 function App() {
   const [authedUser, setAuthedUser] = useState("");
   useEffect(() => {
     auth.onAuthStateChanged(user => {
-      user ? setAuthedUser(user) : setAuthedUser(null);
+      if (user) {
+        setAuthedUser(user);
+        getRedirectResult();
+      } else {
+        setAuthedUser(null);
+      }
     });
   }, [authedUser]);
 

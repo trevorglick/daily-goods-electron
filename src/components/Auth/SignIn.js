@@ -1,5 +1,8 @@
 import React, { useReducer } from "react";
-import { doSignInWithEmailAndPassword } from "../../utils/firebase/auth";
+import {
+  doSignInWithEmailAndPassword,
+  doSignInWithGoogle
+} from "../../utils/firebase/auth";
 
 const initialValues = {
   email: "",
@@ -23,8 +26,14 @@ function SignIn() {
     handleReset();
   };
 
+  const loginWithGoogle = () => {
+    doSignInWithGoogle();
+  };
+
   return (
-    <div className="create-account">
+    <div className="sign-in">
+      <button onClick={loginWithGoogle}>Login with Google</button>
+      <div>Login with email and password</div>
       <form onSubmit={handleSubmit}>
         <label>
           Email
