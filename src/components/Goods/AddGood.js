@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { addGood } from "../../utils/firebase/actions";
+import { addGood } from "../../utils/firebase/goods";
 
 function AddGood({ listInfo, emitGoodName }) {
   const [list, setList] = useState("");

@@ -3,7 +3,7 @@ import {
   acquireGood,
   getListItems,
   removeGood
-} from "../../utils/firebase/actions";
+} from "../../utils/firebase/goods";
 import AddGood from "./AddGood";
 import Good from "./Good";
 

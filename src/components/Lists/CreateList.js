@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { createList } from "../../utils/firebase/actions";
+import { createList } from "../../utils/firebase/goods";
 
 function CreateList({ emitListName }) {
   const [value, setValue] = useState("");
