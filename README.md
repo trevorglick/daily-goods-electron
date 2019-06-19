@@ -9,8 +9,10 @@ The purpose of this project is to have a desktop application that my wife can us
 1. ~~Setup Firebase for storing items from client to server.~~
 2. ~~Client should get items from Firebase.~~
 3. ~~Possibly socketIO to get items in realtime.~~
-4. Users and profiles with unique codes for lists to populate with items.
+4. ~~Users and profiles with unique codes for lists to populate with items.~~
 5. ~~Login/signup functionality.~~
 6. Forgot password functionality.
 7. Proper display for login/signup/logout
 8. Make it look good ⭐️
+9. Share list functionality🔥
+10. Offline Data Sync

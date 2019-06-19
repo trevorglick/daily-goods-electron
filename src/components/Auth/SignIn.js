@@ -4,6 +4,8 @@ import {
   doSignInWithGoogle
 } from "../../utils/firebase/auth";
 
+import "../../style/signin.css";
+
 const initialValues = {
   email: "",
   password: ""
@@ -31,32 +33,53 @@ function SignIn() {
   };
 
   return (
-    <div className="sign-in">
-      <button onClick={loginWithGoogle}>Login with Google</button>
-      <div>Login with email and password</div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="email"
-            name="email"
-            onChange={e => handleChange(e)}
-            value={values.email}
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            name="password"
-            onChange={e => handleChange(e)}
-            value={values.password}
-          />
-        </label>
-        <button type="submit" onClick={e => handleSubmit(e)}>
-          Submit
-        </button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-header">Login Information</div>
+      <div className="login-item">
+        <form className="form form-login" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label className="email" for="login-email">
+              <span className="hidden">Email</span>
+            </label>
+            <input
+              id="login-email"
+              className="form-input"
+              type="email"
+              name="email"
+              placeholder="Enter Email Address"
+              onChange={e => handleChange(e)}
+              value={values.email}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label className="password" for="login-password">
+              <span className="hidden">Password</span>
+            </label>
+            <input
+              id="login-password"
+              className="form-input"
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              onChange={e => handleChange(e)}
+              value={values.password}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <input
+              type="submit"
+              onClick={e => handleSubmit(e)}
+              value="Log In"
+            />
+          </div>
+        </form>
+      </div>
+      <hr />
+      <button className="auth-btn" onClick={loginWithGoogle}>
+        Login with Google
+      </button>
     </div>
   );
 }

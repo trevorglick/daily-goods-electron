@@ -26,34 +26,35 @@ function CreateAccount() {
 
   return (
     <div className="create-account">
+      <div>Create Account Information</div>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
+        <div>
           <input
             type="email"
             name="email"
+            placeholder="Enter Email Address"
             onChange={e => handleChange(e)}
             value={values.email}
           />
-        </label>
-        <label>
-          Password
+        </div>
+        <div>
           <input
             type="password"
             name="password"
+            placeholder="Enter Password"
             onChange={e => handleChange(e)}
             value={values.password}
           />
-        </label>
-        <label>
-          Password Confirmation
+        </div>
+        <div>
           <input
             type="password"
             name="passwordConfirmation"
+            placeholder="Re-enter Password"
             onChange={e => handleChange(e)}
             value={values.passwordConfirmation}
           />
-        </label>
+        </div>
         <button type="submit" onClick={e => handleSubmit(e)}>
           Submit
         </button>
