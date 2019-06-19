@@ -1,17 +1,19 @@
 import { database } from "./index";
 
 const BASE_DATABASE = "/GoodsLists/";
+let user_DB = "";
 
 function getDBListRef(listName) {
-  return database.ref(BASE_DATABASE + listName);
+  return database.ref(user_DB + listName);
 }
 
-function getDBBaseRef() {
-  return database.ref(BASE_DATABASE);
+function getDBBaseRef(uuid) {
+  user_DB = BASE_DATABASE + uuid + "/";
+  return database.ref(BASE_DATABASE + uuid);
 }
 
-export async function getLists() {
-  const dbRef = getDBBaseRef();
+export async function getLists(uuid) {
+  const dbRef = getDBBaseRef(uuid);
   let payload;
   await dbRef.once("value").then(function(snapshot) {
     payload = snapshot.val();

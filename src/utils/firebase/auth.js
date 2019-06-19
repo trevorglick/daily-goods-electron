@@ -1,11 +1,11 @@
-import { app, auth, googleAuthProvider } from "./index";
+import { auth, googleAuthProvider } from "./index";
 
 export function getCurrentUser() {
   return auth.currentUser;
 }
 
 export function doCreateUserWithEmailAndPassword(email, password) {
-  auth
+  return auth
     .createUserWithEmailAndPassword(email, password)
     .then(getCurrentUser => {
       getCurrentUser.user
@@ -27,11 +27,13 @@ export function doCreateUserWithEmailAndPassword(email, password) {
 }
 
 export function doSignInWithEmailAndPassword(email, password) {
-  auth.signInWithEmailAndPassword(email, password).catch(function(error) {
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    console.log(`${errorCode}: ${errorMessage}`);
-  });
+  return auth
+    .signInWithEmailAndPassword(email, password)
+    .catch(function(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(`${errorCode}: ${errorMessage}`);
+    });
 }
 
 export function doSignOut() {
@@ -44,24 +46,21 @@ export function doSignOut() {
 export function doSignInWithGoogle() {
   console.log("attempting sign in from redirect");
   console.log(googleAuthProvider);
-  auth.signInWithRedirect(googleAuthProvider);
+  return auth.signInWithRedirect(googleAuthProvider);
 }
 
 export function getRedirectResult() {
-  auth
+  return auth
     .getRedirectResult()
     .then(result => {
       if (result.credential) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
         // ...
-        console.log("got a token and it is:");
-        console.log(token);
       }
       // The signed-in user info.
-      console.log("got a result and it is:");
-      console.log(result);
       var user = result.user;
+      return result;
     })
     .catch(error => {
       // Handle Errors here.
@@ -74,5 +73,6 @@ export function getRedirectResult() {
       // ...
       console.log("theres an error!");
       console.log(error);
+      return error;
     });
 }

@@ -4,7 +4,7 @@ import GoodsList from "../Goods/GoodsList";
 import List from "./List";
 import { deleteList, getLists } from "../../utils/firebase/goods";
 
-function AvailableLists() {
+function AvailableLists({ user }) {
   const [lists, setLists] = useState([]);
   const [monitor, setMonitor] = useState("");
   const [selectedList, setSelectedList] = useState("");
@@ -26,7 +26,7 @@ function AvailableLists() {
     let ignore = false;
     // Gets the lists avaialable by name.
     const fetchLists = async () => {
-      const result = await getLists();
+      const result = await getLists(user.uid);
       let listData = [];
       if (result) {
         listData = Object.values(result);
@@ -39,7 +39,7 @@ function AvailableLists() {
     return () => {
       ignore = true;
     };
-  }, [monitor]);
+  }, [monitor, selectedList]);
 
   return (
     <div>

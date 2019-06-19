@@ -28,7 +28,7 @@ function GoodsList({ selectedList }) {
       const result = await getListItems(listInfo.name);
       let goods = [];
       if (result) {
-        if (!result.hasOwnProperty("stuff")) return;
+        if (!result.hasOwnProperty("stuff")) return setGoods(goods);
         goods = Object.values(result.stuff);
         if (!ignore) setGoods(goods);
       } else {
