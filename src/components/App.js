@@ -3,6 +3,7 @@ import Auth from "./Auth/Auth";
 import Header from "./Header";
 import AvailableLists from "./Lists/AvailableLists";
 import { auth } from "../utils/firebase/index";
+import "../style/app.css";
 // import { getRedirectResult } from "../utils/firebase/auth";
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
   }, [authedUser]);
 
   return (
-    <div className="App">
+    <div className="app-container">
       <div>
         <Header />
         <hr />

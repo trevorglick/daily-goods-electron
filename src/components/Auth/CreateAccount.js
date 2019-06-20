@@ -25,40 +25,64 @@ function CreateAccount() {
   };
 
   return (
-    <div className="create-account">
-      <div>Create Account Information</div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter Email Address"
-            onChange={e => handleChange(e)}
-            value={values.email}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Password"
-            onChange={e => handleChange(e)}
-            value={values.password}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            name="passwordConfirmation"
-            placeholder="Re-enter Password"
-            onChange={e => handleChange(e)}
-            value={values.passwordConfirmation}
-          />
-        </div>
-        <button type="submit" onClick={e => handleSubmit(e)}>
-          Submit
-        </button>
-      </form>
+    <div className="auth-container">
+      <div className="auth-header">Create Account Information</div>
+      <div className="login-item">
+        <form className="form form-login" onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label className="email" htmlFor="login-email">
+              <span className="hidden">Email</span>
+            </label>
+            <input
+              id="login-email"
+              className="form-input"
+              type="email"
+              name="email"
+              placeholder="Enter Email Address"
+              onChange={e => handleChange(e)}
+              value={values.email}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label className="password" htmlFor="login-password">
+              <span className="hidden">Password</span>
+            </label>
+            <input
+              id="login-password"
+              className="form-input"
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              onChange={e => handleChange(e)}
+              value={values.password}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <label className="password" htmlFor="login-password">
+              <span className="hidden">Password</span>
+            </label>
+            <input
+              id="login-password"
+              className="form-input"
+              type="password"
+              name="passwordConfirmation"
+              placeholder="Re-enter Password"
+              onChange={e => handleChange(e)}
+              value={values.passwordConfirmation}
+              required
+            />
+          </div>
+          <div className="form-field">
+            <input
+              type="submit"
+              onClick={e => handleSubmit(e)}
+              value="Create Account"
+            />
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

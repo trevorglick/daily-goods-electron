@@ -38,7 +38,7 @@ function SignIn() {
       <div className="login-item">
         <form className="form form-login" onSubmit={handleSubmit}>
           <div className="form-field">
-            <label className="email" for="login-email">
+            <label className="email" htmlFor="login-email">
               <span className="hidden">Email</span>
             </label>
             <input
@@ -53,7 +53,7 @@ function SignIn() {
             />
           </div>
           <div className="form-field">
-            <label className="password" for="login-password">
+            <label className="password" htmlFor="login-password">
               <span className="hidden">Password</span>
             </label>
             <input
@@ -74,12 +74,20 @@ function SignIn() {
               value="Log In"
             />
           </div>
+          <div className="form-field">
+            <label className="google" htmlFor="login-google">
+              <span className="hidden">Google</span>
+            </label>
+            <input
+              id="login-google"
+              className="form-input"
+              type="submit"
+              onClick={loginWithGoogle}
+              value="Login with Google"
+            />
+          </div>
         </form>
       </div>
-      <hr />
-      <button className="auth-btn" onClick={loginWithGoogle}>
-        Login with Google
-      </button>
     </div>
   );
 }

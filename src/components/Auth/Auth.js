@@ -14,19 +14,27 @@ function Auth({ user }) {
   return (
     <div>
       {!user && toggleSignIn ? (
-        <div className="auth-div">
+        <div className="form form-login">
           <SignIn />
-          <button className="auth-btn" onClick={createAccount}>
-            Create Account
-          </button>
+          <div className="form-field">
+            <input
+              type="submit"
+              onClick={createAccount}
+              value="Create Account"
+            />
+          </div>
         </div>
       ) : null}
       {!user && !toggleSignIn ? (
-        <div className="auth-div">
+        <div className="form form-login">
           <CreateAccount />
-          <button className="auth-btn" onClick={createAccount}>
-            Back to Sign In
-          </button>
+          <div className="form-field">
+            <input
+              type="submit"
+              onClick={createAccount}
+              value="Back to Sign In"
+            />
+          </div>
         </div>
       ) : null}
       {user ? <SignOut /> : null}

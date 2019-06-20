@@ -1,2 +1,6 @@
-.App {
+.app-container {
+  background-color: #dfdfd4;
+  padding: 4em;
+  border-radius: 5px;
+  box-shadow: 0 1.5px 0 0 rgba(0, 0, 0, 0.1);
 }
