@@ -4,8 +4,6 @@ import {
   doSignInWithGoogle
 } from "../../utils/firebase/auth";
 
-import "../../style/signin.css";
-
 const initialValues = {
   email: "",
   password: ""
@@ -33,10 +31,10 @@ function SignIn() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-header">Login Information</div>
-      <div className="login-item">
-        <form className="form form-login" onSubmit={handleSubmit}>
+    <div>
+      <div className="section-header">Login Information</div>
+      <div className="generic-item">
+        <form className="form form-generic" onSubmit={handleSubmit}>
           <div className="form-field">
             <label className="email" htmlFor="login-email">
               <span className="hidden">Email</span>

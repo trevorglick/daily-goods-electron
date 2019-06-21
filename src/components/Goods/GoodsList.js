@@ -58,25 +58,27 @@ function GoodsList({ selectedList }) {
   };
 
   return (
-    <div className="goods-list-container">
-      <div className="goods-list-header">Goods List</div>
-      <div className="goods-list-remaining">
-        Pending tasks ({goodsRemaining})
-      </div>
-      <div className="goods-list-item">
-        {goods.length >= 1
-          ? goods.map(good => (
-              <Good
-                good={good}
-                goodAcquiredByUniqueId={goodAcquiredByUniqueId}
-                removeGoodByUniqueID={removeGoodByUniqueID}
-                key={good.uniqueId}
-              />
-            ))
-          : null}
-      </div>
-      <div className="goods-list-add-good">
-        <AddGood listInfo={listInfo} emitGoodName={emitGoodName} />
+    <div className="inner-container">
+      <div className="section-header">Goods List</div>
+      <div className="generic-item">
+        <div className="goods-list-add-good">
+          <AddGood listInfo={listInfo} emitGoodName={emitGoodName} />
+        </div>
+        <div className="goods-list-remaining">
+          Pending tasks ({goodsRemaining})
+        </div>
+        <ul className="list-container">
+          {goods.length >= 1
+            ? goods.map(good => (
+                <Good
+                  good={good}
+                  goodAcquiredByUniqueId={goodAcquiredByUniqueId}
+                  removeGoodByUniqueID={removeGoodByUniqueID}
+                  key={good.uniqueId}
+                />
+              ))
+            : null}
+        </ul>
       </div>
     </div>
   );
