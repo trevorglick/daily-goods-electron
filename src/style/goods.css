@@ -1,0 +1,99 @@
+@import url("https://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css");
+/* prettier-ignore */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700);
+
+.form-list label,
+.form-list input[type="text"] {
+  border-radius: 0.25rem;
+  padding: 1rem;
+  color: #3a3f44;
+}
+
+.createlist:before {
+  font: 14px fontawesome;
+  color: #5b5b5b;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  text-decoration: none;
+  color: #543b23;
+  display: block;
+  width: 200px;
+  padding: 0.5em;
+}
+
+li:last-child {
+  border: none;
+}
+
+li:hover {
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(165, 215, 77, 1) 0%,
+    rgba(223, 223, 212, 1) 100%
+  );
+  border-radius: 3px;
+}
+
+.generic-fa-btn {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.submit-form {
+  font: 28px fontawesome;
+  background-color: white;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+.list {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 100%;
+}
+
+hr.list-separator {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.75),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.list-item {
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: 25% 75%;
+  grid-template-rows: 100%;
+}
+
+.list-item-icon {
+  grid-column-start: 1;
+  font: 16px fontawesome;
+}
+
+.list-item-name {
+  grid-column-start: 2;
+  /* padding: 0 2em 0 0.5em; */
+}
+
+.list-item-remove {
+  grid-column-start: 3;
+  color: red;
+  font: 16px fontawesome;
+}

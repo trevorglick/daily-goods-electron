@@ -3,8 +3,10 @@ import { doSignOut } from "../../utils/firebase/auth";
 
 function SignOut() {
   return (
-    <div className="signout">
-      <button onClick={() => doSignOut()}>Sign Out</button>
+    <div className="form form-generic">
+      <div className="form-field outer-btn">
+        <input type="submit" onClick={() => doSignOut()} value="Sign Out" />
+      </div>
     </div>
   );
 }

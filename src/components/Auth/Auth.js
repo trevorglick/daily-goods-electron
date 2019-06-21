@@ -12,11 +12,11 @@ function Auth({ user }) {
   };
 
   return (
-    <div>
+    <div className="inner-container">
       {!user && toggleSignIn ? (
-        <div className="form form-login">
+        <div className="form form-generic">
           <SignIn />
-          <div className="form-field">
+          <div className="form-field outer-btn">
             <input
               type="submit"
               onClick={createAccount}
@@ -26,9 +26,9 @@ function Auth({ user }) {
         </div>
       ) : null}
       {!user && !toggleSignIn ? (
-        <div className="form form-login">
+        <div className="form form-generic">
           <CreateAccount />
-          <div className="form-field">
+          <div className="form-field outer-btn">
             <input
               type="submit"
               onClick={createAccount}

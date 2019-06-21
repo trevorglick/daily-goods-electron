@@ -44,8 +44,8 @@ function App() {
         <Header />
         <hr />
       </div>
-      <Auth user={authedUser} />
       {authedUser ? <AvailableLists user={authedUser} /> : null}
+      <Auth user={authedUser} />
     </div>
   );
 }

@@ -3,6 +3,7 @@ import CreateList from "./CreateList";
 import GoodsList from "../Goods/GoodsList";
 import List from "./List";
 import { deleteList, getLists } from "../../utils/firebase/goods";
+import "../../style/goods.css";
 
 function AvailableLists({ user }) {
   const [lists, setLists] = useState([]);
@@ -42,24 +43,26 @@ function AvailableLists({ user }) {
   }, [monitor, selectedList]);
 
   return (
-    <div>
-      <div>Create A New List</div>
-      <CreateList emitListName={emitListName} />
-      <div>
-        {lists.length >= 1
-          ? lists.map((list, index) => (
-              <List
-                list={list}
-                index={index}
-                selectList={selectList}
-                deleteListByIndex={deleteListByIndex}
-                key={index}
-              />
-            ))
-          : null}
+    <div className="inner-container">
+      <div className="section-header">Available Lists</div>
+      <div className="generic-item">
+        <CreateList emitListName={emitListName} />
+        <ul className="list-container">
+          {lists.length >= 1
+            ? lists.map((list, index) => (
+                <List
+                  list={list}
+                  index={index}
+                  selectList={selectList}
+                  deleteListByIndex={deleteListByIndex}
+                  key={index}
+                />
+              ))
+            : null}
+        </ul>
+        <hr />
       </div>
-      <hr />
-      <GoodsList selectedList={selectedList} />
+      {selectedList ? <GoodsList selectedList={selectedList} /> : null}
     </div>
   );
 }

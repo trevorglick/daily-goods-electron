@@ -25,10 +25,10 @@ function CreateAccount() {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-header">Create Account Information</div>
-      <div className="login-item">
-        <form className="form form-login" onSubmit={handleSubmit}>
+    <div>
+      <div className="section-header">Create Account Information</div>
+      <div className="generic-item">
+        <form className="form form-generic" onSubmit={handleSubmit}>
           <div className="form-field">
             <label className="email" htmlFor="login-email">
               <span className="hidden">Email</span>

@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGifts, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import { addGood } from "../../utils/firebase/goods";
 
 function AddGood({ listInfo, emitGoodName }) {
@@ -26,14 +28,23 @@ function AddGood({ listInfo, emitGoodName }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        className="input"
-        value={value}
-        placeholder="Add a good"
-        onChange={e => setValue(e.target.value)}
-      />
+    <form className="form form-generic" onSubmit={handleSubmit}>
+      <div className="form-field">
+        <label className="addGood" htmlFor="add-good">
+          <FontAwesomeIcon icon={faGifts} />
+        </label>
+        <input
+          id="add-good"
+          type="text"
+          className="form-input"
+          value={value}
+          placeholder="Add a good"
+          onChange={e => setValue(e.target.value)}
+        />
+        <button className="submit-form generic-fa-btn" onClick={handleSubmit}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+        </button>
+      </div>
     </form>
   );
 }
