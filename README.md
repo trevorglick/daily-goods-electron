@@ -12,7 +12,8 @@ The purpose of this project is to have a desktop application that my wife can us
 4. ~~Users and profiles with unique codes for lists to populate with items.~~
 5. ~~Login/signup functionality.~~
 6. Forgot password functionality.
-7. Proper display for login/signup/logout
-8. Make it look good ⭐️
+7. ~~Proper display for login/signup/logout~~
+8. ~~Make it look good ⭐️~~
 9. Share list functionality🔥
 10. Offline Data Sync
+11. Ask someone who knows how things should look to critique
