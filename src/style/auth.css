@@ -62,8 +62,8 @@ input {
 .form-generic input[type="email"],
 .form-generic input[type="password"],
 .form-generic input[type="submit"] {
-  border-radius: 0.25rem;
-  padding: 1rem;
+  border-radius: 0.25em;
+  padding: 1em;
   color: #3a3f44;
 }
 
@@ -71,8 +71,8 @@ input {
   background-color: #fff;
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  padding-left: 1.25rem;
-  padding-right: 1.25rem;
+  padding-left: 1.25em;
+  padding-right: 1.25em;
 }
 
 .form-generic input[type="email"],
@@ -103,7 +103,7 @@ input {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  margin-bottom: 1rem;
+  margin-bottom: 1em;
 }
 
 .hidden {

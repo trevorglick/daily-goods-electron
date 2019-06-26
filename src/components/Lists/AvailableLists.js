@@ -34,13 +34,14 @@ function AvailableLists({ user }) {
         if (!ignore) setLists(listData);
       } else {
         setLists(listData);
+        setSelectedList("");
       }
     };
     fetchLists();
     return () => {
       ignore = true;
     };
-  }, [monitor, selectedList]);
+  }, [monitor, selectedList, user.uid]);
 
   return (
     <div className="inner-container">

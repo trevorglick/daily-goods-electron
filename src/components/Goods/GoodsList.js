@@ -65,7 +65,7 @@ function GoodsList({ selectedList }) {
           <AddGood listInfo={listInfo} emitGoodName={emitGoodName} />
         </div>
         <div className="goods-list-remaining">
-          Pending tasks ({goodsRemaining})
+          Goods Remaining: ({goodsRemaining})
         </div>
         <ul className="list-container">
           {goods.length >= 1

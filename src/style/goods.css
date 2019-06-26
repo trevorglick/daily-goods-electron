@@ -4,8 +4,8 @@
 
 .form-list label,
 .form-list input[type="text"] {
-  border-radius: 0.25rem;
-  padding: 1rem;
+  border-radius: 0.25em;
+  padding: 1em;
   color: #3a3f44;
 }
 
@@ -38,7 +38,7 @@ li:hover {
     90deg,
     rgba(2, 0, 36, 1) 0%,
     rgba(165, 215, 77, 1) 0%,
-    rgba(223, 223, 212, 1) 100%
+    rgb(138, 138, 76) 100%
   );
   border-radius: 3px;
 }
@@ -78,8 +78,9 @@ hr.list-separator {
 .list-item {
   cursor: pointer;
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 15% 85%;
   grid-template-rows: 100%;
+  grid-column-start: 1;
 }
 
 .list-item-icon {
@@ -93,7 +94,11 @@ hr.list-separator {
 }
 
 .list-item-remove {
-  grid-column-start: 3;
+  grid-column-start: 2;
   color: red;
   font: 16px fontawesome;
+}
+
+.goods-list-remaining {
+  padding-bottom: 1em;
 }
