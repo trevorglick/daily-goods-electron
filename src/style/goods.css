@@ -32,17 +32,6 @@ li:last-child {
   border: none;
 }
 
-li:hover {
-  background: rgb(2, 0, 36);
-  background: linear-gradient(
-    90deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(165, 215, 77, 1) 0%,
-    rgb(138, 138, 76) 100%
-  );
-  border-radius: 3px;
-}
-
 .generic-fa-btn {
   border: none;
   background: none;
@@ -101,4 +90,22 @@ hr.list-separator {
 
 .goods-list-remaining {
   padding-bottom: 1em;
+}
+
+.createListButton {
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.list-creation {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
+.hide-lists {
+  display: none;
+}
+
+.show-lists {
+  display: block;
 }

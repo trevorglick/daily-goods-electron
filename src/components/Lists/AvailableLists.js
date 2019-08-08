@@ -3,15 +3,19 @@ import CreateList from "./CreateList";
 import GoodsList from "../Goods/GoodsList";
 import List from "./List";
 import { deleteList, getLists } from "../../utils/firebase/goods";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import "../../style/goods.css";
 
 function AvailableLists({ user }) {
   const [lists, setLists] = useState([]);
   const [monitor, setMonitor] = useState("");
   const [selectedList, setSelectedList] = useState("");
+  const [toggleListCreate, setToggleListCreate] = useState(false);
 
   const emitListName = name => {
     setMonitor(name);
+    toggleCreate();
   };
 
   const deleteListByIndex = index => {
@@ -21,6 +25,10 @@ function AvailableLists({ user }) {
 
   const selectList = index => {
     setSelectedList(lists[index]);
+  };
+
+  const toggleCreate = () => {
+    setToggleListCreate(!toggleListCreate);
   };
 
   useEffect(() => {
@@ -45,24 +53,33 @@ function AvailableLists({ user }) {
 
   return (
     <div className="inner-container">
-      <div className="section-header">Available Lists</div>
-      <div className="generic-item">
-        <CreateList emitListName={emitListName} />
-        <ul className="list-container">
-          {lists.length >= 1
-            ? lists.map((list, index) => (
-                <List
-                  list={list}
-                  index={index}
-                  selectList={selectList}
-                  deleteListByIndex={deleteListByIndex}
-                  key={index}
-                />
-              ))
-            : null}
-        </ul>
-        <hr />
-      </div>
+      <span id="hider" className="show-lists">
+        <div className="section-header">
+          <div className="list-creation">
+            <span>{lists.length >= 1 ? "Available Lists" : null}</span>
+            <span className="createListButton" onClick={toggleCreate}>
+              Create a List <FontAwesomeIcon icon={faCartPlus} />
+            </span>
+          </div>
+        </div>
+        <div className="generic-item">
+          {toggleListCreate ? <CreateList emitListName={emitListName} /> : null}
+          <ul className="list-container">
+            {lists.length >= 1
+              ? lists.map((list, index) => (
+                  <List
+                    list={list}
+                    index={index}
+                    selectList={selectList}
+                    deleteListByIndex={deleteListByIndex}
+                    key={index}
+                  />
+                ))
+              : null}
+          </ul>
+          <hr />
+        </div>
+      </span>
       {selectedList ? <GoodsList selectedList={selectedList} /> : null}
     </div>
   );

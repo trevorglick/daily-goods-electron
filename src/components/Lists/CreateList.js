@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faClipboardList,
@@ -18,6 +18,10 @@ function CreateList({ emitListName }) {
     setValue("");
   };
 
+  useEffect(() => {
+    console.log("were in here");
+  }, []);
+
   return (
     <form className="form form-generic" onSubmit={handleSubmit}>
       <div className="form-field">
@@ -31,6 +35,7 @@ function CreateList({ emitListName }) {
           value={value}
           placeholder="Create a New List"
           onChange={e => setValue(e.target.value)}
+          autoFocus
         />
         <button className="submit-form generic-fa-btn" onClick={handleSubmit}>
           <FontAwesomeIcon icon={faArrowLeft} />

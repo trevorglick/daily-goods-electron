@@ -32,7 +32,7 @@ function SignIn() {
 
   return (
     <div>
-      <div className="section-header">Login Information</div>
+      <div className="section-header">Login</div>
       <div className="generic-item">
         <form className="form form-generic" onSubmit={handleSubmit}>
           <div className="form-field">
